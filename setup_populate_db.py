@@ -1,9 +1,9 @@
 from peewee import *
 
-mysql_db = MySQLDatabase('school.db')
+db = SqliteDatabase('school.db')
 
 
-class Students(Model):
+class STUDENTS(Model):
     """ MySQL Table """
     ID = IntegerField(primary_key=True)
     FIRST_NAME = CharField()
@@ -11,14 +11,25 @@ class Students(Model):
     GRADE = IntegerField(default=0)
 
     class Meta:
-        database = mysql_db
+        database = db
 
 
-def initialize():
+def create_table(TABLE):
 	"""Create the database and table (only if they don't already exist)."""
 	db.connect()
-	db.create_tables([Students], safe=True)
+	db.create_tables([TABLE], safe=True)
 
 
-# Create table STUDENTS
+def populate_table():
+    pass
+
+
+
+if __name__ == '__main__':
+    list_of_tables = [STUDENTS, TEACHERS]
+    # list_of_tables = [STUDENTS, TEACHERS, SUBJECTS, SCHEDULE, ROOMS, PERIODS, CLASSES]
+    print("The following table(s) were created successfully")
+    for table in list_of_tables:
+        create_table(table)
+        print(str(table))
 
