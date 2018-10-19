@@ -1,6 +1,6 @@
 from peewee import *
 
-mysql_db = MySQLDatabase('school')
+mysql_db = MySQLDatabase('school.db')
 
 
 class Students(Model):
