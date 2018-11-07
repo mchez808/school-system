@@ -1,5 +1,7 @@
 from peewee import *
 
+import os
+
 db = SqliteDatabase('school.db')
 
 
@@ -20,16 +22,15 @@ def create_table(TABLE):
 	db.create_tables([TABLE], safe=True)
 
 
-def populate_table():
+def populate_table(TABLE):
     pass
-
+    # TABLE.create()
 
 
 if __name__ == '__main__':
-    list_of_tables = [STUDENTS, TEACHERS]
-    # list_of_tables = [STUDENTS, TEACHERS, SUBJECTS, SCHEDULE, ROOMS, PERIODS, CLASSES]
+    table = STUDENTS
     print("The following table(s) were created successfully")
-    for table in list_of_tables:
-        create_table(table)
-        print(str(table))
-
+    create_table(table)
+    print(str(table))
+input("End of file. Press <Enter> to clear screen and exit.")
+os.system('clear')
