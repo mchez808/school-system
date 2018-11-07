@@ -16,21 +16,21 @@ class STUDENTS(Model):
         database = db
 
 
-def create_table(TABLE):
-	"""Create the database and table (only if they don't already exist)."""
-	db.connect()
-	db.create_tables([TABLE], safe=True)
+db.connect()
+db.create_tables([STUDENTS], safe=True)
+STUDENTS.create(ID=10387,
+                 FIRST_NAME='Jarrod',
+                 LAST_NAME='Sam',
+                 GRADE=8);
+
+select_all = STUDENTS.select()
+descending_option = STUDENTS.GRADE.desc()
+sorted_query = select_all.order_by(descending_option)
+one_record = sorted_query.get()
+
+print("One student is: {0.ID}  {0.FIRST_NAME}  {0.LAST_NAME}.".format(one_record))
 
 
-def populate_table(TABLE):
-    pass
-    # TABLE.create()
-
-
-if __name__ == '__main__':
-    table = STUDENTS
-    print("The following table(s) were created successfully")
-    create_table(table)
-    print(str(table))
-input("End of file. Press <Enter> to clear screen and exit.")
-os.system('clear')
+input("Entry will now be deleted. Press <Enter>")
+one_record.delete_instance()
+db.close()
